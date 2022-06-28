@@ -12,7 +12,6 @@ const Todo = require("./persist/todo");
 
 //call in memory.js
 const mem = require("./persist/memory");
-const { deleteTodo } = require("./persist/memory");
 
 app.post("/todo", (req, res) => {
     // validate the data
@@ -29,9 +28,6 @@ app.post("/todo", (req, res) => {
 // set up server paths and handlers
 app.get("/todo/:id", (req, res) => {
     const id = req.params.id;
-    let expiration = setTimeout(() => {
-        mem.deleteTodo(id)
-    }, 1000)
     //caching
     let myCacheTodo = mem.getTodo(id);
     //find out if your cache exists if not do the todo.findbyid
